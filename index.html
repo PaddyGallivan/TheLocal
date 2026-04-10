@@ -360,6 +360,16 @@
   }
   .submit-btn:active { opacity: 0.8; }
 
+  /* Like & Flag buttons */
+  .like-btn, .flag-btn {
+    background: none; border: none; cursor: pointer; font-size: 13px; padding: 3px 6px;
+    border-radius: 8px; transition: background 0.15s; color: var(--text3);
+  }
+  .like-btn:hover { background: #ffeef0; color: var(--red); }
+  .like-btn.liked { color: var(--red); font-weight: 700; }
+  .flag-btn { font-size: 11px; opacity: 0.4; }
+  .flag-btn:hover { opacity: 1; background: #fff3f3; }
+
   /* Toast */
   .toast {
     position: fixed; top: 70px; left: 50%; transform: translateX(-50%) translateY(-20px);
@@ -389,7 +399,7 @@
     <div class="hero">
       <div class="hero-greeting" id="greeting">Good morning</div>
       <div class="hero-headline">Your suburb,<em>connected.</em></div>
-      <div class="hero-sub" id="activeCount">14 neighbours active today Á· Williamstown</div>
+      <div class="hero-sub" id="activeCount">14 neighbours active today Â· Williamstown</div>
     </div>
 
     <div class="section">
@@ -548,17 +558,28 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ===== CONFIG (white-label: change these for any suburb) =====
+const SUBURB = 'Williamstown';
+const APP_TITLE = 'The Local';
+
+// ===== CONTENT MODERATION =====
+const BANNED_KEYWORDS = ['xxx','escort','adult only','buy now','dm for price','limited offer','click here','free money','earn $','mlm','pyramid','follow me','onlyfans'];
+function moderateContent(text) {
+  const lower = text.toLowerCase();
+  return BANNED_KEYWORDS.some(kw => lower.includes(kw));
+}
+
 // ===== STATE =====
 let currentScreen = 'home';
 let myKudos = 7;
 
 // ===== DATA =====
 const boardPosts = [
-  { id: 1, tag: 'free', title: 'Free lemon tree seedlings', body: 'About 20 seedlings in pots on the verge. Come and take them â first in best dressed.', author: 'Sarah K.', street: 'Ferguson St', time: '2m', likes: 4 },
-  { id: 2, tag: 'alert', title: 'Car broken into on Douglas Pde', body: 'Noticed a silver Corolla with smashed window this morning. Worth checking your car. Police have been notified.', author: 'Mike T.', street: 'Douglas Pde', time: '14m', likes: 11 },
-  { id: 3, tag: 'event', title: 'Williamstown Film Festival â Friday', body: 'Free outdoor screening at the Point Gellibrand reserve, 7pm. Bring a blanket and picnic. Movie announced Friday morning.', author: 'Council Notice', street: 'Point Gellibrand', time: '1h', likes: 23 },
-  { id: 4, tag: 'wanted', title: 'Looking for lawn mower to borrow', body: 'Just moved in and haven\'t bought one yet. Happy to return with a slab of beer.', author: 'Dave W.', street: 'Hanmer St', time: '2h', likes: 2 },
-  { id: 5, tag: 'free', title: 'IKEA Billy bookcase â free to good home', body: 'White, 80x28x202cm, good condition. Must be collected today. DM for address.', author: 'Priya M.', street: 'Cole St', time: '3h', likes: 7 },
+  { id: 1, tag: 'free', title: 'Free lemon tree seedlings', body: 'About 20 seedlings in pots on the verge. Come and take them â first in best dressed.', author: 'Sarah K.', street: 'Ferguson St', time: '2m', likes: 4, liked: false, flags: 0, hidden: false },
+  { id: 2, tag: 'alert', title: 'Car broken into on Douglas Pde', body: 'Noticed a silver Corolla with smashed window this morning. Worth checking your car. Police have been notified.', author: 'Mike T.', street: 'Douglas Pde', time: '14m', likes: 11, liked: false, flags: 0, hidden: false },
+  { id: 3, tag: 'event', title: 'Williamstown Film Festival â Friday', body: 'Free outdoor screening at the Point Gellibrand reserve, 7pm. Bring a blanket and picnic. Movie announced Friday morning.', author: 'Council Notice', street: 'Point Gellibrand', time: '1h', likes: 23, liked: false, flags: 0, hidden: false },
+  { id: 4, tag: 'wanted', title: 'Looking for lawn mower to borrow', body: 'Just moved in and haven\'t bought one yet. Happy to return with a slab of beer.', author: 'Dave W.', street: 'Hanmer St', time: '2h', likes: 2, liked: false, flags: 0, hidden: false },
+  { id: 5, tag: 'free', title: 'IKEA Billy bookcase â free to good home', body: 'White, 80x28x202cm, good condition. Must be collected today. DM for address.', author: 'Priya M.', street: 'Cole St', time: '3h', likes: 7, liked: false, flags: 0, hidden: false },
 ];
 
 const walks = [
@@ -630,7 +651,8 @@ function renderFeed() {
 
 function renderBoard() {
   const el = document.getElementById('postList');
-  el.innerHTML = boardPosts.map(p => `
+  const visible = boardPosts.filter(p => !p.hidden);
+  el.innerHTML = visible.map(p => `
     <div class="post-card">
       <div class="post-header">
         <span class="post-tag ${p.tag}">${p.tag.charAt(0).toUpperCase()+p.tag.slice(1)}</span>
@@ -641,7 +663,8 @@ function renderBoard() {
       <div class="post-footer">
         <span class="post-author">${p.author}</span>
         <span class="post-street">ð ${p.street}</span>
-        <span class="post-likes">â¤ï¸ ${p.likes}</span>
+        <button class="like-btn ${p.liked ? 'liked' : ''}" onclick="likePost(${p.id})">â¤ï¸ ${p.likes}</button>
+        <button class="flag-btn" onclick="flagPost(${p.id})" title="Report post">ð©</button>
       </div>
     </div>
   `).join('');
@@ -652,7 +675,7 @@ function renderWalks() {
   el.innerHTML = walks.map(w => {
     const full = w.spotsLeft === 0;
     const btnClass = w.joined ? 'joined' : full ? 'full-btn' : '';
-    const btnText = w.joined ? 'â You\'re in'$ : full ? 'Walk is full' : `Join walk Â· ${w.spotsLeft} spot${w.spotsLeft !== 1 ? 's' : ''} left`;
+    const btnText = w.joined ? 'â You\'re in!' : full ? 'Walk is full' : `Join walk Â· ${w.spotsLeft} spot${w.spotsLeft !== 1 ? 's' : ''} left`;
     return `
     <div class="walk-card">
       <div class="walk-header">
@@ -763,6 +786,29 @@ function joinDinner(id) {
   renderDinners();
 }
 
+function likePost(id) {
+  const p = boardPosts.find(x => x.id === id);
+  if (!p || p.liked) return;
+  p.liked = true;
+  p.likes++;
+  renderBoard();
+  showToast('â¤ï¸ Liked!');
+}
+
+function flagPost(id) {
+  const p = boardPosts.find(x => x.id === id);
+  if (!p || p.flaggedByMe) return;
+  p.flaggedByMe = true;
+  p.flags = (p.flags || 0) + 1;
+  if (p.flags >= 3) {
+    p.hidden = true;
+    showToast('Post reported and hidden. Thanks for keeping TheBoard safe.');
+  } else {
+    showToast('Post reported. Thank you.');
+  }
+  renderBoard();
+}
+
 function helpRequest(id) {
   const r = handRequests.find(x => x.id === id);
   if (!r || r.helped) return;
@@ -802,10 +848,10 @@ function openFab() {
         <div class="form-group">
           <label class="form-label">Category</label>
           <div class="tag-row">
-            <div class="tag-opt selected" onclick="selectTag(this)">Free</div>
-            <div class="tag-opt" onclick="selectTag(this)">Event</div>
-            <div class="tag-opt" onclick="selectTag(this)">Alert</div>
-            <div class="tag-opt" onclick="selectTag(this)">Wanted</div>
+            <div class="tag-opt selected" onclick="selectExclTag(this)">Free</div>
+            <div class="tag-opt" onclick="selectExclTag(this)">Event</div>
+            <div class="tag-opt" onclick="selectExclTag(this)">Alert</div>
+            <div class="tag-opt" onclick="selectExclTag(this)">Wanted</div>
           </div>
         </div>
         <div class="form-group">
@@ -914,11 +960,21 @@ function selectTag(el) {
   el.classList.toggle('selected');
 }
 
+// Exclusive tag selection (only one active at a time â for board category)
+function selectExclTag(el) {
+  el.closest('.tag-row').querySelectorAll('.tag-opt').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
 function submitPost() {
   const inputs = document.querySelectorAll('#modalContent .form-input, #modalContent .form-textarea');
   const title = inputs[0]?.value || 'New notice';
   if (!title.trim()) { showToast('Add a title first'); return; }
-  boardPosts.unshift({ id: Date.now(), tag: 'free', title, body: inputs[1]?.value || '', author: 'Paddy G.', street: inputs[2]?.value || 'Williamstown', time: 'just now', likes: 0 });
+  const body = inputs[1]?.value || '';
+  if (moderateContent(title) || moderateContent(body)) { showToast('â ï¸ Post contains prohibited content'); return; }
+  const selectedTag = document.querySelector('#modalContent .tag-opt.selected');
+  const tag = selectedTag ? selectedTag.textContent.trim().toLowerCase() : 'free';
+  boardPosts.unshift({ id: Date.now(), tag, title, body, author: 'Paddy G.', street: inputs[2]?.value || SUBURB, time: 'just now', likes: 0, liked: false, flags: 0, hidden: false });
   document.getElementById('boardBadge').textContent = 'â¨ New';
   renderBoard();
   document.getElementById('modalOverlay').classList.remove('open');
@@ -944,8 +1000,13 @@ function submitHand() {
   const inputs = document.querySelectorAll('#modalContent .form-input, #modalContent .form-textarea');
   const title = inputs[0]?.value || 'Need a hand';
   if (!title.trim()) { showToast('Add a title first'); return; }
-  const urgent = document.querySelector('#modalContent .tag-opt.selected:last-of-type')?.textContent?.includes('Urgent');
-  handRequests.unshift({ id: Date.now(), title, body: inputs[1]?.value || '', person: 'Paddy G.', location: inputs[2]?.value || 'Williamstown', time: 'just now', urgent: urgent || false, helped: false });
+  const body = inputs[1]?.value || '';
+  if (moderateContent(title) || moderateContent(body)) { showToast('â ï¸ Post contains prohibited content'); return; }
+  // Fix: find the urgency tag-row (last .tag-row in modal) and check if Urgent is selected
+  const urgencySelected = document.querySelector('#modalContent .tag-opt.selected[onclick*="selectTag"]');
+  const allSelected = document.querySelectorAll('#modalContent .tag-opt.selected');
+  const urgent = Array.from(allSelected).some(el => el.textContent.includes('Urgent'));
+  handRequests.unshift({ id: Date.now(), title, body, person: 'Paddy G.', location: inputs[2]?.value || SUBURB, time: 'just now', urgent, helped: false, flags: 0, hidden: false });
   renderHand();
   document.getElementById('modalOverlay').classList.remove('open');
   showToast('Request posted! ð¤');
