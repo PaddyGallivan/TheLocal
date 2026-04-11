@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>The Local â Williamstown</title>
+<title>The Local &#8212; Williamstown</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   :root {
@@ -46,7 +46,7 @@
     background: var(--cream); border: 1px solid var(--border);
     border-radius: 20px; padding: 5px 12px; font-size: 13px; color: var(--text2); cursor: pointer;
   }
-  .header-suburb::before { content: 'ð'; font-size: 11px; }
+  .header-suburb::before { content: '\01F4CD '; font-size: 11px; }
   .avatar {
     width: 36px; height: 36px; border-radius: 50%;
     background: var(--amber); color: white; font-weight: 700; font-size: 15px;
@@ -186,7 +186,7 @@
   .walk-dog-face:first-child { margin-left: 0; }
   .walk-dogs-text { font-size: 13px; color: var(--text2); }
   .walk-route { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
-  .walk-route::before { content: 'ð'; font-size: 12px; }
+  .walk-route::before { content: '\01F4CD '; font-size: 12px; }
   .join-btn {
     width: 100%; padding: 11px; border-radius: 12px; border: none;
     background: var(--amber); color: white; font-size: 14px; font-weight: 700;
@@ -399,7 +399,7 @@
     <div class="hero">
       <div class="hero-greeting" id="greeting">Good morning</div>
       <div class="hero-headline">Your suburb,<em>connected.</em></div>
-      <div class="hero-sub" id="activeCount">14 neighbours active today Â· Williamstown</div>
+      <div class="hero-sub" id="activeCount">14 neighbours active today &#183; Williamstown</div>
     </div>
 
     <div class="section">
@@ -407,24 +407,24 @@
     </div>
     <div class="feature-grid" id="featureGrid">
       <div class="feature-card amber" onclick="showScreen('board')">
-        <span class="feat-icon">ð</span>
+        <span class="feat-icon">&#128204;</span>
         <div class="feat-badge" id="boardBadge">3 new</div>
         <div class="feat-name">TheBoard</div>
         <div class="feat-sub" style="color:rgba(255,255,255,0.7)">Community notices</div>
       </div>
       <div class="feature-card" onclick="showScreen('pack')">
-        <span class="feat-icon">ð¾</span>
+        <span class="feat-icon">&#128062;</span>
         <div class="feat-badge green" id="packBadge">2 walks</div>
         <div class="feat-name">PackLeader</div>
         <div class="feat-sub">Dog walks near you</div>
       </div>
       <div class="feature-card" onclick="showScreen('roulette')">
-        <span class="feat-icon">ð²</span>
+        <span class="feat-icon">&#127922;</span>
         <div class="feat-name">TableRoulette</div>
         <div class="feat-sub">Dinner with strangers</div>
       </div>
       <div class="feature-card" onclick="showScreen('hand')">
-        <span class="feat-icon">ð¤</span>
+        <span class="feat-icon">&#129309;</span>
         <div class="feat-badge new" id="handBadge">New</div>
         <div class="feat-name">NeedAHand</div>
         <div class="feat-sub">Quick favours</div>
@@ -440,10 +440,10 @@
   <!-- BOARD SCREEN -->
   <div class="screen" id="screen-board">
     <div class="screen-hero">
-      <div class="screen-hero-icon">ð</div>
+      <div class="screen-hero-icon">&#128204;</div>
       <div>
         <h2>TheBoard</h2>
-        <p>What's happening in Williamstown</p>
+        <p id="boardSubtitle">What's happening in Williamstown</p>
       </div>
     </div>
     <div class="post-list" id="postList"></div>
@@ -452,7 +452,7 @@
   <!-- PACK SCREEN -->
   <div class="screen" id="screen-pack">
     <div class="screen-hero">
-      <div class="screen-hero-icon">ð¾</div>
+      <div class="screen-hero-icon">&#128062;</div>
       <div>
         <h2>PackLeader</h2>
         <p>Dog walks happening near you</p>
@@ -464,13 +464,13 @@
   <!-- ROULETTE SCREEN -->
   <div class="screen" id="screen-roulette">
     <div class="roulette-hero">
-      <div class="dice">ð²</div>
+      <div class="dice">&#127922;</div>
       <h2>TableRoulette</h2>
-      <p>Get matched for dinner with 4â6 locals.<br>Show up. Make friends. Repeat.</p>
+      <p>Get matched for dinner with 4&#8211;6 locals.<br>Show up. Make friends. Repeat.</p>
     </div>
     <div class="roulette-info">
       <h4>How it works</h4>
-      <p>Sign up for a dinner slot. We match you with locals you don't know yet. Pick a pub or restaurant nearby and show up. No apps, no awkward small talk prep â just good people in your suburb.</p>
+      <p>Sign up for a dinner slot. We match you with locals you don't know yet. Pick a pub or restaurant nearby and show up. No apps, no awkward small talk prep &#8212; just good people in your suburb.</p>
     </div>
     <div class="dinner-list" id="dinnerList"></div>
   </div>
@@ -484,7 +484,7 @@
           <p>Quick favours from your neighbours</p>
         </div>
         <div class="kudos-pill" onclick="showScreen('profile')">
-          <span class="kstar">â­</span>
+          <span class="kstar">&#11088;</span>
           <span id="kudosPill">7 Kudos</span>
         </div>
       </div>
@@ -497,9 +497,9 @@
     <div class="profile-hero">
       <div class="profile-av">P</div>
       <div class="profile-name">Paddy G.</div>
-      <div class="profile-suburb">ð Williamstown</div>
+      <div class="profile-suburb" id="profileSuburb">&#128205; Williamstown</div>
       <div class="kudos-display">
-        <span class="k-star">â­</span>
+        <span class="k-star">&#11088;</span>
         <div>
           <div class="k-num" id="profileKudos">7</div>
           <div class="k-label">Local Kudos<br>earned helping neighbours</div>
@@ -507,7 +507,7 @@
       </div>
     </div>
     <div class="leaderboard">
-      <div class="lb-title">Suburb leaderboard â Top Locals</div>
+      <div class="lb-title">Suburb leaderboard &#8212; Top Locals</div>
       <div id="leaderboard"></div>
     </div>
   </div>
@@ -516,33 +516,33 @@
   <div class="bottom-nav">
     <div class="nav-item">
       <button class="nav-btn active" id="nav-home" onclick="showScreen('home')">
-        <span class="icon">ð </span>Home
+        <span class="icon">&#127968;</span>Home
       </button>
     </div>
     <div class="nav-item">
       <button class="nav-btn" id="nav-board" onclick="showScreen('board')">
-        <span class="icon">ð</span>Board
+        <span class="icon">&#128204;</span>Board
       </button>
     </div>
     <div class="nav-item">
       <button class="nav-btn" id="nav-pack" onclick="showScreen('pack')">
-        <span class="icon">ð¾</span>Pack
+        <span class="icon">&#128062;</span>Pack
       </button>
     </div>
     <div class="nav-item">
       <button class="nav-btn" id="nav-roulette" onclick="showScreen('roulette')">
-        <span class="icon">ð²</span>Roulette
+        <span class="icon">&#127922;</span>Roulette
       </button>
     </div>
     <div class="nav-item">
       <button class="nav-btn" id="nav-hand" onclick="showScreen('hand')">
-        <span class="icon">ð¤</span>Hand
+        <span class="icon">&#129309;</span>Hand
       </button>
     </div>
   </div>
 
   <!-- FAB -->
-  <button class="fab" id="fab" onclick="openFab()">ï¼</button>
+  <button class="fab" id="fab" onclick="openFab()">&#65291;</button>
 
 </div>
 
@@ -575,46 +575,46 @@ let myKudos = 7;
 
 // ===== DATA =====
 const boardPosts = [
-  { id: 1, tag: 'free', title: 'Free lemon tree seedlings', body: 'About 20 seedlings in pots on the verge. Come and take them â first in best dressed.', author: 'Sarah K.', street: 'Ferguson St', time: '2m', likes: 4, liked: false, flags: 0, hidden: false },
+  { id: 1, tag: 'free', title: 'Free lemon tree seedlings', body: 'About 20 seedlings in pots on the verge. Come and take them \u2014 first in best dressed.', author: 'Sarah K.', street: 'Ferguson St', time: '2m', likes: 4, liked: false, flags: 0, hidden: false },
   { id: 2, tag: 'alert', title: 'Car broken into on Douglas Pde', body: 'Noticed a silver Corolla with smashed window this morning. Worth checking your car. Police have been notified.', author: 'Mike T.', street: 'Douglas Pde', time: '14m', likes: 11, liked: false, flags: 0, hidden: false },
-  { id: 3, tag: 'event', title: 'Williamstown Film Festival â Friday', body: 'Free outdoor screening at the Point Gellibrand reserve, 7pm. Bring a blanket and picnic. Movie announced Friday morning.', author: 'Council Notice', street: 'Point Gellibrand', time: '1h', likes: 23, liked: false, flags: 0, hidden: false },
+  { id: 3, tag: 'event', title: 'Williamstown Film Festival \u2014 Friday', body: 'Free outdoor screening at the Point Gellibrand reserve, 7pm. Bring a blanket and picnic. Movie announced Friday morning.', author: 'Council Notice', street: 'Point Gellibrand', time: '1h', likes: 23, liked: false, flags: 0, hidden: false },
   { id: 4, tag: 'wanted', title: 'Looking for lawn mower to borrow', body: 'Just moved in and haven\'t bought one yet. Happy to return with a slab of beer.', author: 'Dave W.', street: 'Hanmer St', time: '2h', likes: 2, liked: false, flags: 0, hidden: false },
-  { id: 5, tag: 'free', title: 'IKEA Billy bookcase â free to good home', body: 'White, 80x28x202cm, good condition. Must be collected today. DM for address.', author: 'Priya M.', street: 'Cole St', time: '3h', likes: 7, liked: false, flags: 0, hidden: false },
+  { id: 5, tag: 'free', title: 'IKEA Billy bookcase \u2014 free to good home', body: 'White, 80x28x202cm, good condition. Must be collected today. DM for address.', author: 'Priya M.', street: 'Cole St', time: '3h', likes: 7, liked: false, flags: 0, hidden: false },
 ];
 
 const walks = [
-  { id: 1, title: 'Morning coastal walk', time: 'Today 7:30am', route: 'Point Gellibrand â Seaworks â Beach Reserve', dogs: ['ð', 'ð©', 'ð¦®'], dogCount: 3, spotsLeft: 2, joined: false },
-  { id: 2, title: 'Afternoon river loop', time: 'Today 4:00pm', route: 'Railway Pl â Kororoit Creek Trail', dogs: ['ð', 'ð¶'], dogCount: 2, spotsLeft: 3, joined: false },
-  { id: 3, title: 'Weekend beach run', time: 'Saturday 8:00am', route: 'Williamstown Beach â Jawbone Reserve', dogs: ['ð¦®', 'ð©', 'ð', 'ð¶'], dogCount: 4, spotsLeft: 0, joined: false },
+  { id: 1, title: 'Morning coastal walk', time: 'Today 7:30am', route: 'Point Gellibrand \u2192 Seaworks \u2192 Beach Reserve', dogs: ['\u{1F415}', '\u{1F429}', '\u{1F9AE}'], dogCount: 3, spotsLeft: 2, joined: false },
+  { id: 2, title: 'Afternoon river loop', time: 'Today 4:00pm', route: 'Railway Pl \u2192 Kororoit Creek Trail', dogs: ['\u{1F415}', '\u{1F436}'], dogCount: 2, spotsLeft: 3, joined: false },
+  { id: 3, title: 'Weekend beach run', time: 'Saturday 8:00am', route: 'Williamstown Beach \u2192 Jawbone Reserve', dogs: ['\u{1F9AE}', '\u{1F429}', '\u{1F415}', '\u{1F436}'], dogCount: 4, spotsLeft: 0, joined: false },
 ];
 
 const dinners = [
-  { id: 1, venue: 'The Pier Hotel', date: 'Tonight Â· 7:30pm', status: 'tonight', statusLabel: 'Tonight!', detail: 'Casual dinner in the bistro. 4 spots filled, 2 left.', faces: ['ð','ð','ð','ð'], spotsLeft: 2, going: false },
-  { id: 2, venue: 'Siren at Scienceworks', date: 'Saturday Â· 6:30pm', status: 'open', statusLabel: 'Open', detail: 'Great waterfront views. 2 spots filled, 4 left.', faces: ['ð','ð'], spotsLeft: 4, going: false },
-  { id: 3, venue: 'Captain Melville', date: 'Next Friday Â· 7:00pm', status: 'open', statusLabel: 'Open', detail: 'Favourite Willy pub. Just started â 5 spots left.', faces: ['ð'], spotsLeft: 5, going: false },
+  { id: 1, venue: 'The Pier Hotel', date: 'Tonight \u00B7 7:30pm', status: 'tonight', statusLabel: 'Tonight!', detail: 'Casual dinner in the bistro. 4 spots filled, 2 left.', faces: ['\u{1F60A}','\u{1F642}','\u{1F604}','\u{1F60E}'], spotsLeft: 2, going: false },
+  { id: 2, venue: 'Siren at Scienceworks', date: 'Saturday \u00B7 6:30pm', status: 'open', statusLabel: 'Open', detail: 'Great waterfront views. 2 spots filled, 4 left.', faces: ['\u{1F642}','\u{1F60A}'], spotsLeft: 4, going: false },
+  { id: 3, venue: 'Captain Melville', date: 'Next Friday \u00B7 7:00pm', status: 'open', statusLabel: 'Open', detail: 'Favourite Willy pub. Just started \u2014 5 spots left.', faces: ['\u{1F60E}'], spotsLeft: 5, going: false },
 ];
 
 const handRequests = [
-  { id: 1, title: 'Locked out of my house', body: 'Spare key is at my neighbour\'s but they\'re not answering. Need a ladder to reach my back window â around 2m.', person: 'Tom R.', location: 'Douglas Pde', time: '12m', urgent: true, helped: false },
+  { id: 1, title: 'Locked out of my house', body: 'Spare key is at my neighbour\'s but they\'re not answering. Need a ladder to reach my back window \u2014 around 2m.', person: 'Tom R.', location: 'Douglas Pde', time: '12m', urgent: true, helped: false },
   { id: 2, title: 'Can someone grab milk from IGA?', body: 'Flat white and 2L full cream. Happy to Venmo straight away. Won\'t be able to leave the house for a few hours.', person: 'Angela S.', location: 'Hanmer St', time: '25m', urgent: false, helped: false },
   { id: 3, title: 'Help moving a fridge (10 mins)', body: 'New fridge arrives today and I need to move the old one to the driveway. It\'s not heavy, just big. Two people needed.', person: 'Chris B.', location: 'Cecil St', time: '1h', urgent: false, helped: false },
-  { id: 4, title: 'Dog sitting â just 2 hours tonight', body: 'Have a work thing that ran late. Rosie is super friendly, loves everyone. Just needs to sit with someone for 2 hours from 7pm.', person: 'Jo K.', location: 'Ferguson St', time: '2h', urgent: false, helped: false },
+  { id: 4, title: 'Dog sitting \u2014 just 2 hours tonight', body: 'Have a work thing that ran late. Rosie is super friendly, loves everyone. Just needs to sit with someone for 2 hours from 7pm.', person: 'Jo K.', location: 'Ferguson St', time: '2h', urgent: false, helped: false },
 ];
 
 const leaderboard = [
-  { rank: 1, initial: 'S', name: 'Sarah K.', suburb: 'Williamstown', kudos: 34 },
-  { rank: 2, initial: 'M', name: 'Mike T.', suburb: 'Williamstown', kudos: 21 },
-  { rank: 3, initial: 'A', name: 'Angela S.', suburb: 'Williamstown', kudos: 15 },
-  { rank: 4, initial: 'P', name: 'Paddy G.', suburb: 'Williamstown', kudos: myKudos, isMe: true },
-  { rank: 5, initial: 'J', name: 'Jo K.', suburb: 'Williamstown', kudos: 6 },
-  { rank: 6, initial: 'C', name: 'Chris B.', suburb: 'Williamstown', kudos: 4 },
+  { rank: 1, initial: 'S', name: 'Sarah K.', suburb: SUBURB, kudos: 34 },
+  { rank: 2, initial: 'M', name: 'Mike T.', suburb: SUBURB, kudos: 21 },
+  { rank: 3, initial: 'A', name: 'Angela S.', suburb: SUBURB, kudos: 15 },
+  { rank: 4, initial: 'P', name: 'Paddy G.', suburb: SUBURB, kudos: myKudos, isMe: true },
+  { rank: 5, initial: 'J', name: 'Jo K.', suburb: SUBURB, kudos: 6 },
+  { rank: 6, initial: 'C', name: 'Chris B.', suburb: SUBURB, kudos: 4 },
 ];
 
 const feedItems = [
-  { icon: 'ð', name: 'Sarah K. posted on TheBoard', detail: 'Free lemon tree seedlings â Ferguson St', time: '2m', screen: 'board' },
-  { icon: 'ð¾', name: 'PackLeader walk starting', detail: 'Point Gellibrand â 3 dogs, 2 spots left', time: '8m', screen: 'pack' },
-  { icon: 'ð¤', name: 'Tom R. needs a hand', detail: 'Locked out on Douglas Pde â urgent', time: '12m', screen: 'hand' },
-  { icon: 'ð²', name: 'TableRoulette tonight', detail: '4 neighbours going â 2 spots left', time: '1h', screen: 'roulette' },
+  { icon: '\u{1F4CC}', name: 'Sarah K. posted on TheBoard', detail: 'Free lemon tree seedlings \u2014 Ferguson St', time: '2m', screen: 'board' },
+  { icon: '\u{1F43E}', name: 'PackLeader walk starting', detail: 'Point Gellibrand \u2014 3 dogs, 2 spots left', time: '8m', screen: 'pack' },
+  { icon: '\u{1F91D}', name: 'Tom R. needs a hand', detail: 'Locked out on Douglas Pde \u2014 urgent', time: '12m', screen: 'hand' },
+  { icon: '\u{1F3B2}', name: 'TableRoulette tonight', detail: '4 neighbours going \u2014 2 spots left', time: '1h', screen: 'roulette' },
 ];
 
 // ===== RENDER =====
@@ -662,9 +662,9 @@ function renderBoard() {
       <div class="post-body">${p.body}</div>
       <div class="post-footer">
         <span class="post-author">${p.author}</span>
-        <span class="post-street">ð ${p.street}</span>
-        <button class="like-btn ${p.liked ? 'liked' : ''}" onclick="likePost(${p.id})">â¤ï¸ ${p.likes}</button>
-        <button class="flag-btn" onclick="flagPost(${p.id})" title="Report post">ð©</button>
+        <span class="post-street">\u{1F4CD} ${p.street}</span>
+        <button class="like-btn ${p.liked ? 'liked' : ''}" onclick="likePost(${p.id})">\u2764\uFE0F ${p.likes}</button>
+        <button class="flag-btn" onclick="flagPost(${p.id})" title="Report post">\u{1F6A9}</button>
       </div>
     </div>
   `).join('');
@@ -675,13 +675,13 @@ function renderWalks() {
   el.innerHTML = walks.map(w => {
     const full = w.spotsLeft === 0;
     const btnClass = w.joined ? 'joined' : full ? 'full-btn' : '';
-    const btnText = w.joined ? 'â You\'re in!' : full ? 'Walk is full' : `Join walk Â· ${w.spotsLeft} spot${w.spotsLeft !== 1 ? 's' : ''} left`;
+    const btnText = w.joined ? '\u2713 You\'re in!' : full ? 'Walk is full' : `Join walk \u00B7 ${w.spotsLeft} spot${w.spotsLeft !== 1 ? 's' : ''} left`;
     return `
     <div class="walk-card">
       <div class="walk-header">
         <div>
           <div class="walk-title">${w.title}</div>
-          <div class="walk-time">â° ${w.time}</div>
+          <div class="walk-time">\u23F0 ${w.time}</div>
         </div>
         <div class="walk-spots ${full ? 'full' : ''}">${full ? 'Full' : w.spotsLeft + ' left'}</div>
       </div>
@@ -698,7 +698,7 @@ function renderWalks() {
 function renderDinners() {
   const el = document.getElementById('dinnerList');
   el.innerHTML = dinners.map(d => {
-    const btnText = d.going ? 'â You\'re in for dinner!' : d.spotsLeft === 0 ? 'Dinner is full' : 'Sign me up for this dinner';
+    const btnText = d.going ? '\u2713 You\'re in for dinner!' : d.spotsLeft === 0 ? 'Dinner is full' : 'Sign me up for this dinner';
     return `
     <div class="dinner-card">
       <div class="dinner-header">
@@ -711,7 +711,7 @@ function renderDinners() {
       <div class="dinner-detail">${d.detail}</div>
       <div class="dinner-faces">
         ${d.faces.map(f => `<div class="dinner-face">${f}</div>`).join('')}
-        <span class="dinner-faces-text">${d.faces.length} going Â· ${d.spotsLeft} spot${d.spotsLeft !== 1 ? 's' : ''} left</span>
+        <span class="dinner-faces-text">${d.faces.length} going \u00B7 ${d.spotsLeft} spot${d.spotsLeft !== 1 ? 's' : ''} left</span>
       </div>
       <button class="roulette-btn ${d.going ? 'in' : ''}" onclick="joinDinner(${d.id})" ${d.spotsLeft === 0 && !d.going ? 'disabled style="background:var(--border);color:var(--text3);cursor:not-allowed"' : ''}>${btnText}</button>
     </div>
@@ -724,16 +724,16 @@ function renderHand() {
     <div class="hand-card ${r.urgent ? 'urgent' : ''}">
       <div class="hand-header">
         <div class="hand-title">${r.title}</div>
-        <div class="hand-urg ${r.urgent ? 'urgent' : 'normal'}">${r.urgent ? 'ð´ Urgent' : 'Help needed'}</div>
+        <div class="hand-urg ${r.urgent ? 'urgent' : 'normal'}">${r.urgent ? '\u{1F534} Urgent' : 'Help needed'}</div>
       </div>
       <div class="hand-body">${r.body}</div>
       <div class="hand-meta">
         <span class="hand-person">${r.person}</span>
-        <span class="hand-location">ð ${r.location}</span>
+        <span class="hand-location">\u{1F4CD} ${r.location}</span>
         <span class="hand-time">${r.time} ago</span>
       </div>
       <button class="help-btn ${r.helped ? 'helped' : ''}" onclick="helpRequest(${r.id})">
-        ${r.helped ? 'â You helped â nice one!' : `ð¤ I can help <span class="kudos-earn">Â· earn +1 Kudos â­</span>`}
+        ${r.helped ? '\u2713 You helped \u2014 nice one!' : `\u{1F91D} I can help <span class="kudos-earn">\u00B7 earn +1 Kudos \u2B50</span>`}
       </button>
     </div>
   `).join('');
@@ -750,13 +750,13 @@ function renderLeaderboard() {
   const rankClasses = ['gold', 'silver', 'bronze'];
   el.innerHTML = leaderboard.map(l => `
     <div class="lb-item ${l.isMe ? 'me' : ''}">
-      <div class="lb-rank ${rankClasses[l.rank-1] || ''}">${l.rank <= 3 ? ['ð¥','ð¥','ð¥'][l.rank-1] : l.rank}</div>
+      <div class="lb-rank ${rankClasses[l.rank-1] || ''}">${l.rank <= 3 ? ['\u{1F947}','\u{1F948}','\u{1F949}'][l.rank-1] : l.rank}</div>
       <div class="lb-av">${l.initial}</div>
       <div class="lb-info">
         <div class="lb-name">${l.name}${l.isMe ? ' (you)' : ''}</div>
         <div class="lb-suburb">${l.suburb}</div>
       </div>
-      <div class="lb-kudos">â­ ${l.kudos}</div>
+      <div class="lb-kudos">\u2B50 ${l.kudos}</div>
     </div>
   `).join('');
 }
@@ -772,7 +772,7 @@ function joinWalk(id) {
   const w = walks.find(x => x.id === id);
   if (!w || w.spotsLeft === 0) return;
   w.joined = !w.joined;
-  if (w.joined) { w.spotsLeft--; showToast('You\'re on the walk! ð¾'); }
+  if (w.joined) { w.spotsLeft--; showToast('You\'re on the walk! \u{1F43E}'); }
   else { w.spotsLeft++; }
   renderWalks();
 }
@@ -781,7 +781,7 @@ function joinDinner(id) {
   const d = dinners.find(x => x.id === id);
   if (!d) return;
   d.going = !d.going;
-  if (d.going) { d.spotsLeft--; d.faces.push('ð¤'); showToast('You\'re going to dinner! ð²'); }
+  if (d.going) { d.spotsLeft--; d.faces.push('\u{1F464}'); showToast('You\'re going to dinner! \u{1F3B2}'); }
   else { d.spotsLeft++; d.faces.pop(); }
   renderDinners();
 }
@@ -792,7 +792,7 @@ function likePost(id) {
   p.liked = true;
   p.likes++;
   renderBoard();
-  showToast('â¤ï¸ Liked!');
+  showToast('\u2764\uFE0F Liked!');
 }
 
 function flagPost(id) {
@@ -817,9 +817,9 @@ function helpRequest(id) {
   updateKudosDisplay();
   renderHand();
   renderLeaderboard();
-  showToast('â­ +1 Kudos earned! Thanks for helping.', 'kudos');
+  showToast('\u2B50 +1 Kudos earned! Thanks for helping.', 'kudos');
   // Update feed
-  feedItems.unshift({ icon: 'â­', name: 'You earned a Kudos!', detail: `Helped ${r.person} on ${r.location}`, time: 'just now', screen: 'hand' });
+  feedItems.unshift({ icon: '\u2B50', name: 'You earned a Kudos!', detail: `Helped ${r.person} on ${r.location}`, time: 'just now', screen: 'hand' });
   if (feedItems.length > 5) feedItems.pop();
   renderFeed();
 }
@@ -866,7 +866,7 @@ function openFab() {
           <label class="form-label">Your street</label>
           <input type="text" class="form-input" placeholder="e.g. Ferguson St">
         </div>
-        <button class="submit-btn" onclick="submitPost()">Post to TheBoard ð</button>
+        <button class="submit-btn" onclick="submitPost()">Post to TheBoard \u{1F4CC}</button>
       `
     },
     pack: {
@@ -883,7 +883,7 @@ function openFab() {
         </div>
         <div class="form-group">
           <label class="form-label">Route</label>
-          <input type="text" class="form-input" placeholder="e.g. Point Gellibrand â Beach Reserve">
+          <input type="text" class="form-input" placeholder="e.g. Point Gellibrand \u2192 Beach Reserve">
         </div>
         <div class="form-group">
           <label class="form-label">Max spots</label>
@@ -891,14 +891,14 @@ function openFab() {
             <option>2 dogs</option><option>3 dogs</option><option>4 dogs</option><option>5 dogs</option>
           </select>
         </div>
-        <button class="submit-btn" onclick="submitWalk()">Create walk ð¾</button>
+        <button class="submit-btn" onclick="submitWalk()">Create walk \u{1F43E}</button>
       `
     },
     roulette: {
       title: 'Join the waitlist',
       html: `
         <div class="modal-title">Join the dinner waitlist</div>
-        <p style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.5">We'll match you with 4â6 locals when enough people sign up. You'll get a notification with the venue and time.</p>
+        <p style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.5">We'll match you with 4\u20136 locals when enough people sign up. You'll get a notification with the venue and time.</p>
         <div class="form-group">
           <label class="form-label">Preferred nights</label>
           <div class="tag-row">
@@ -913,7 +913,7 @@ function openFab() {
           <label class="form-label">Dietary requirements</label>
           <input type="text" class="form-input" placeholder="e.g. vegetarian, no nuts">
         </div>
-        <button class="submit-btn" onclick="submitRoulette()">Join the waitlist ð²</button>
+        <button class="submit-btn" onclick="submitRoulette()">Join the waitlist \u{1F3B2}</button>
       `
     },
     hand: {
@@ -934,12 +934,12 @@ function openFab() {
         </div>
         <div class="form-group">
           <label class="form-label">Urgency</label>
-          <div class="tag-row">
-            <div class="tag-opt selected" onclick="selectTag(this)">Can wait</div>
-            <div class="tag-opt" onclick="selectTag(this)">ð´ Urgent</div>
+          <div class="tag-row urgency-row">
+            <div class="tag-opt selected" onclick="selectExclTag(this)">Can wait</div>
+            <div class="tag-opt" onclick="selectExclTag(this)">\u{1F534} Urgent</div>
           </div>
         </div>
-        <button class="submit-btn" onclick="submitHand()">Post request ð¤</button>
+        <button class="submit-btn" onclick="submitHand()">Post request \u{1F91D}</button>
       `
     }
   };
@@ -960,7 +960,7 @@ function selectTag(el) {
   el.classList.toggle('selected');
 }
 
-// Exclusive tag selection (only one active at a time â for board category)
+// Exclusive tag selection (only one active at a time \u2014 for board category)
 function selectExclTag(el) {
   el.closest('.tag-row').querySelectorAll('.tag-opt').forEach(t => t.classList.remove('selected'));
   el.classList.add('selected');
@@ -971,29 +971,29 @@ function submitPost() {
   const title = inputs[0]?.value || 'New notice';
   if (!title.trim()) { showToast('Add a title first'); return; }
   const body = inputs[1]?.value || '';
-  if (moderateContent(title) || moderateContent(body)) { showToast('â ï¸ Post contains prohibited content'); return; }
+  if (moderateContent(title) || moderateContent(body)) { showToast('\u26A0\uFE0F Post contains prohibited content'); return; }
   const selectedTag = document.querySelector('#modalContent .tag-opt.selected');
   const tag = selectedTag ? selectedTag.textContent.trim().toLowerCase() : 'free';
   boardPosts.unshift({ id: Date.now(), tag, title, body, author: 'Paddy G.', street: inputs[2]?.value || SUBURB, time: 'just now', likes: 0, liked: false, flags: 0, hidden: false });
-  document.getElementById('boardBadge').textContent = 'â¨ New';
+  document.getElementById('boardBadge').textContent = '\u2728 New';
   renderBoard();
   document.getElementById('modalOverlay').classList.remove('open');
-  showToast('Posted to TheBoard! ð');
+  showToast('Posted to TheBoard! \u{1F4CC}');
 }
 
 function submitWalk() {
   const inputs = document.querySelectorAll('#modalContent .form-input');
   const title = inputs[0]?.value || 'New walk';
   if (!title.trim()) { showToast('Add a walk name first'); return; }
-  walks.unshift({ id: Date.now(), title, time: inputs[1]?.value || 'Today', route: inputs[2]?.value || 'Williamstown', dogs: ['ð'], dogCount: 1, spotsLeft: 3, joined: false });
+  walks.unshift({ id: Date.now(), title, time: inputs[1]?.value || 'Today', route: inputs[2]?.value || SUBURB, dogs: ['\u{1F415}'], dogCount: 1, spotsLeft: 3, joined: false });
   renderWalks();
   document.getElementById('modalOverlay').classList.remove('open');
-  showToast('Walk created! ð¾');
+  showToast('Walk created! \u{1F43E}');
 }
 
 function submitRoulette() {
   document.getElementById('modalOverlay').classList.remove('open');
-  showToast('You\'re on the waitlist! We\'ll match you soon ð²');
+  showToast('You\'re on the waitlist! We\'ll match you soon \u{1F3B2}');
 }
 
 function submitHand() {
@@ -1001,15 +1001,13 @@ function submitHand() {
   const title = inputs[0]?.value || 'Need a hand';
   if (!title.trim()) { showToast('Add a title first'); return; }
   const body = inputs[1]?.value || '';
-  if (moderateContent(title) || moderateContent(body)) { showToast('â ï¸ Post contains prohibited content'); return; }
-  // Fix: find the urgency tag-row (last .tag-row in modal) and check if Urgent is selected
-  const urgencySelected = document.querySelector('#modalContent .tag-opt.selected[onclick*="selectTag"]');
-  const allSelected = document.querySelectorAll('#modalContent .tag-opt.selected');
-  const urgent = Array.from(allSelected).some(el => el.textContent.includes('Urgent'));
+  if (moderateContent(title) || moderateContent(body)) { showToast('\u26A0\uFE0F Post contains prohibited content'); return; }
+  const urgentTag = document.querySelector('#modalContent .urgency-row .tag-opt.selected');
+  const urgent = urgentTag ? urgentTag.textContent.trim().includes('Urgent') : false;
   handRequests.unshift({ id: Date.now(), title, body, person: 'Paddy G.', location: inputs[2]?.value || SUBURB, time: 'just now', urgent, helped: false, flags: 0, hidden: false });
   renderHand();
   document.getElementById('modalOverlay').classList.remove('open');
-  showToast('Request posted! ð¤');
+  showToast('Request posted! \u{1F91D}');
 }
 
 // ===== TOAST =====
@@ -1021,6 +1019,13 @@ function showToast(msg, type = '') {
 }
 
 // ===== INIT =====
+// Wire suburb name everywhere (white-label: only SUBURB constant needs changing)
+document.title = APP_TITLE + ' \u2014 ' + SUBURB;
+document.getElementById('suburbPill').textContent = SUBURB;
+document.getElementById('activeCount').textContent = '14 neighbours active today \u00B7 ' + SUBURB;
+document.getElementById('boardSubtitle').textContent = 'What\'s happening in ' + SUBURB;
+document.getElementById('profileSuburb').innerHTML = '&#128205; ' + SUBURB;
+
 renderAll();
 showScreen('home');
 </script>
